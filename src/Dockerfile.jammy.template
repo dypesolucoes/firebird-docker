@@ -24,8 +24,12 @@ RUN set -eux; \
         libtomcrypt1 \
         libtommath1 \
         netbase \
-        procps; \
+        procps \
+        tzdata; \
     rm -rf /var/lib/apt/lists/*
+
+# timezone env with default
+ENV TZ=Etc/UTC
 
 # Fix libtommath for FB 3.0 -- https://github.com/FirebirdSQL/firebird/issues/5716#issuecomment-826239174
 RUN [ $FIREBIRD_MAJOR -eq 3 ] && ln -sf /usr/lib/x86_64-linux-gnu/libtommath.so.1 /usr/lib/x86_64-linux-gnu/libtommath.so.0 || true
